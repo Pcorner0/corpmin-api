@@ -1,10 +1,10 @@
 package database
 
 import (
-	"github.com/joho/godotenv"
-	"gorm.io/driver/mysql"
+	//"os"
+
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"os"
 )
 
 var DB *gorm.DB
@@ -16,21 +16,15 @@ func InitDB() *gorm.DB {
 
 func Connect() *gorm.DB {
 
-	err := godotenv.Load(".env")
+	// retrieve the url
+	//dbURL := os.Getenv("DATABASE_URL")
+	url := "postgres://duqqerkdxsmzkb:fa98b952bcaab61ba7fed7f12a4fb1448a8668ccb3a09e8efb3741bd28cbf438@ec2-52-72-99-110.compute-1.amazonaws.com:5432/dahahunspaa3kt"
 
-	DbUsername := os.Getenv("DB_USER")
-	DbPassword := os.Getenv("DB_PASSWORD")
-	DbName := os.Getenv("DB_NAME")
-	DbHost := os.Getenv("DB_HOST")
-	DbPort := os.Getenv("DB_PORT")
-
-	dsn := DbUsername + ":" + DbPassword + "@tcp" + "(" + DbHost + ":" + DbPort + ")/" + DbName + "?" + "parseTime=true&loc=Local"
-
-	DB, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	DB, err := gorm.Open(postgres.Open(url), &gorm.Config{})
 
 	if err != nil {
 		panic("Se perdió la conexión a la base de datos")
-		
+
 	}
 	println("Conexión a la base de datos establecida")
 

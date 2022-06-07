@@ -1,1 +1,1 @@
-web: bin/corpmin-api
+web:bin/corpmin-api.exe
