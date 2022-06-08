@@ -7,7 +7,6 @@ import (
 
 // Operaciones Accion Estructura para operaciones nuevas
 type Operaciones struct {
-	I             int       `json:"i" gorm:"autoIncrement:true"`
 	Id            int       `json:"id" binding:"required"`
 	RFC           string    `json:"rfc" binding:"required,uppercase,max=50"`
 	Razonsocial   string    `json:"razonsocial" binding:"required,uppercase,max=250"`
